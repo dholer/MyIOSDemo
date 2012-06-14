@@ -8,16 +8,34 @@
 
 #import "dholerAppDelegate.h"
 
+#import "dholerViewController.h"
+
 @implementation dholerAppDelegate
 
 @synthesize window = _window;
+@synthesize viewController = _viewController;
+
+- (void)dealloc
+{
+    [_window release];
+    [_viewController release];
+    [super dealloc];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[[dholerViewController alloc] initWithNibName:@"dholerViewController_iPhone" bundle:nil] autorelease];
+    } else {
+        self.viewController = [[[dholerViewController alloc] initWithNibName:@"dholerViewController_iPad" bundle:nil] autorelease];
+    }
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

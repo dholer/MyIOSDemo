@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class dholerViewController;
+
 @interface dholerAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) dholerViewController *viewController;
 
 @end
